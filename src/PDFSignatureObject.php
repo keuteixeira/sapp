@@ -65,7 +65,8 @@ class PDFSignatureObject extends PDFObject {
      * Constructs the object and sets the default values needed to sign
      * @param oid the oid for the object
      */
-    public function __construct($oid) {
+    public function __construct($oid,$timesT=null) {
+
         $this->_prev_content_size = 0;
         $this->_post_content_size = null;
         parent::__construct($oid, [
@@ -74,7 +75,7 @@ class PDFSignatureObject extends PDFObject {
             'SubFilter' => "/adbe.pkcs7.detached",
             'ByteRange' => new PDFValueSimple(str_repeat(" ", __BYTERANGE_SIZE)),
             'Contents' => "<" . str_repeat("0", __SIGNATURE_MAX_LENGTH) . ">",
-            'M' => new PDFValueString(timestamp_to_pdfdatestring()),
+            'M' => new PDFValueString(timestamp_to_pdfdatestring($timesT)),
         ]);
     }
     /**

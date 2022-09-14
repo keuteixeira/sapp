@@ -21,10 +21,6 @@
 
 namespace ddn\sapp\helpers;
 
-if (! defined('STDERR')) {
-    define('STDERR', fopen('php://stderr', 'wb'));
-}
-
 /** 
  * Outputs a var to a string, using the PHP var_dump function
  * @param var the variable to output
@@ -87,8 +83,6 @@ function varval($e) {
 function p_stderr(&$e, $tag = "Error", $level = 1) {
     $dinfo = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT); 
     $dinfo = $dinfo[$level];
-    $e = sprintf("$tag info at %s:%d: %s", $dinfo['file'], $dinfo['line'], varval($e));
-    fwrite(STDERR, "$e\n");
 }
 /**
  * Function that writes a string to stderr and returns a value (to ease coding like return p_debug(...))

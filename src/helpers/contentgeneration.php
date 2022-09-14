@@ -134,7 +134,11 @@ function _add_image($object_factory, $filename, $x=0, $y=0, $w=0, $h=0) {
     if ($filename[0] === '@') {
         $filecontent = substr($filename, 1);
     } else {
-        $filecontent = @file_get_contents($filename);
+		if (file_exists($filename)) {
+			$filecontent = @file_get_contents($filename);
+		} else {
+			$filecontent = $filename;
+		}
 
         if ($filecontent === false)
             return p_error("failed to get the image");

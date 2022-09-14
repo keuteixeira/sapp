@@ -444,7 +444,7 @@ class PDFUtilFnc {
         if ($filesize_original === false)
             return p_error("could not open file $filenametosign");
 
-        $temp_filename = tempnam($tmpfolder, "pdfsign");
+        $temp_filename = @tempnam($tmpfolder, "pdfsign");
 
         if ($temp_filename === false)
             return p_error("could not create a temporary filename");

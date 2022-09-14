@@ -34,21 +34,20 @@ class PDFValue implements ArrayAccess {
     public function __toString() {
         return "" . $this->value;
     }
-    public function offsetExists ( $offset ) : bool {
+    public function offsetExists ( $offset ) {
         if (!is_array($this->value)) return false;
         return isset($this->value[$offset]);
     }
-    #[\ReturnTypeWillChange]
     public function offsetGet ( $offset ) {
         if (!is_array($this->value)) return false;
         if (!isset($this->value[$offset])) return false;
         return $this->value[$offset];
     }
-    public function offsetSet($offset , $value ) : void {
-        if (!is_array($this->value)) return;
+    public function offsetSet($offset , $value ) {
+        if (!is_array($this->value)) return false;
         $this->value[$offset] = $value;
     }
-    public function offsetUnset($offset ) : void {
+    public function offsetUnset($offset ) {
         if ((!is_array($this->value)) || (!isset($this->value[$offset]))) 
             throw new Exception('invalid offset');
         unset($this->value[$offset]);
