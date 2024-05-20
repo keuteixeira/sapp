@@ -482,6 +482,8 @@ class PDFUtilFnc {
         // convert signature to hex
         $signature = current(unpack('H*', $signature));
         $signature = str_pad($signature, __SIGNATURE_MAX_LENGTH, '0');       
+		
+		@unlink($temp_filename);
 
         return $signature;
     }   
